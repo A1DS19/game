@@ -28,8 +28,8 @@ impl Window {
         self
     }
 
-    pub fn set_name(&mut self, name: String) -> &Self {
-        self.name = name;
+    pub fn set_name(&mut self, name: &str) -> &Self {
+        self.name = name.to_string();
         self
     }
 

@@ -1,12 +1,14 @@
 use engine::piston_window::clear;
 use engine::window;
 
+const GAME_NAME: &str = "My super cool game";
+
 fn main() {
     engine::setup();
 
     let mut window = window::Window::default();
     window.set_size((600.0, 600.0));
-    window.set_name(format!("my super cool game"));
+    window.set_name(GAME_NAME);
     let mut piston_window = window.build();
 
     while let Some(e) = piston_window.next() {
