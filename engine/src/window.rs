@@ -7,34 +7,38 @@ pub struct Window {
     name: String,
 }
 
-impl Default for Window {
-    fn default() -> Self {
-        Self {
-            size: PistonSize {
-                width: 0.0,
-                height: 0.0,
-            },
-            name: format!(""),
-        }
-    }
+pub struct WindowBuilder {
+    pub window: Window,
 }
 
-impl Window {
-    pub fn set_size(&mut self, size: Size) -> &Self {
-        self.size = PistonSize {
+impl WindowBuilder {
+    pub fn new() -> Self {
+        Self {
+            window: Window {
+                size: PistonSize {
+                    height: 0.0,
+                    width: 0.0,
+                },
+                name: "".to_string(),
+            },
+        }
+    }
+
+    pub fn set_size(mut self, size: &Size) -> Self {
+        self.window.size = PistonSize {
             width: size.0,
             height: size.1,
         };
         self
     }
 
-    pub fn set_name(&mut self, name: &str) -> &Self {
-        self.name = name.to_string();
+    pub fn set_name(mut self, name: &str) -> Self {
+        self.window.name = name.to_string();
         self
     }
 
-    pub fn build(&mut self) -> PistonWindow {
-        WindowSettings::new(&self.name, self.size)
+    pub fn build(self) -> PistonWindow {
+        WindowSettings::new(&self.window.name, self.window.size)
             .exit_on_esc(true)
             .build()
             .expect("Window building process failed")

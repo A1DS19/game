@@ -1,3 +1,4 @@
+pub mod app;
 pub mod window;
 pub use log::{debug, error, info, trace, warn};
 pub use piston_window;

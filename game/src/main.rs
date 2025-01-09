@@ -1,19 +1,27 @@
-use engine::piston_window::clear;
-use engine::window;
+use engine::app::App;
+use engine::piston_window::{clear, color, rectangle};
+use engine::window::WindowBuilder;
 
 const GAME_NAME: &str = "My super cool game";
+const GAME_WINDOW: (f64, f64) = (1000.0, 1000.0);
 
 fn main() {
     engine::setup();
 
-    let mut window = window::Window::default();
-    window.set_size((600.0, 600.0));
-    window.set_name(GAME_NAME);
-    let mut piston_window = window.build();
+    let mut window = WindowBuilder::new()
+        .set_size(&GAME_WINDOW)
+        .set_name(GAME_NAME)
+        .build();
 
-    while let Some(e) = piston_window.next() {
-        piston_window.draw_2d(&e, |_c, g, _d| {
-            clear([0.5, 1.0, 0.5, 1.0], g);
+    while let Some(e) = window.next() {
+        window.draw_2d(&e, |c, g, _d| {
+            clear([0.5, 0.5, 0.5, 1.0], g);
+            rectangle(
+                color::BLACK,
+                rectangle::square(0.0, 0.0, 100.0),
+                c.transform,
+                g,
+            );
         });
     }
 }
