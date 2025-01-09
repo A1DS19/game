@@ -1,4 +1,3 @@
-use engine::app::App;
 use engine::piston_window::{clear, color, rectangle};
 use engine::window::WindowBuilder;
 
