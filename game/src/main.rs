@@ -1,4 +1,5 @@
-use engine::piston_window::{clear, color, rectangle};
+use engine::app::App;
+use engine::piston_window::{clear, color, rectangle, Event};
 use engine::window::WindowBuilder;
 
 const GAME_NAME: &str = "My super cool game";
@@ -12,7 +13,7 @@ fn main() {
         .set_name(GAME_NAME)
         .build();
 
-    while let Some(e) = window.next() {
+    App::new(window).render(|window, e| {
         window.draw_2d(&e, |c, g, _d| {
             clear([0.5, 0.5, 0.5, 1.0], g);
             rectangle(
@@ -22,5 +23,5 @@ fn main() {
                 g,
             );
         });
-    }
+    });
 }
