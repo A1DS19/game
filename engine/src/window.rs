@@ -1,3 +1,4 @@
+use piston_window::prelude::*;
 use piston_window::{PistonWindow, Size as PistonSize, WindowSettings};
 
 type Size = (f64, f64);
@@ -38,8 +39,11 @@ impl WindowBuilder {
     }
 
     pub fn build(self) -> PistonWindow {
+        let opengl = OpenGL::V4_5;
+
         WindowSettings::new(&self.window.name, self.window.size)
             .exit_on_esc(true)
+            .graphics_api(opengl)
             .build()
             .expect("Window building process failed")
     }
